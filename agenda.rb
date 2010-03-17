@@ -6,16 +6,18 @@ class Agenda
       puts "Digite o #{tipo} que procura" ; buscado = gets.chomp
       File.open("teste.yml") do |txt|
         YAML::load_documents( txt ) do |obj|
-	  if obj[tipo.capitalize] =~ /#{buscado}/i
-	    obj.each do |k, v|
-	      if v == "" ; next ; end
-	      puts "#{k}: #{v}"
-	    end
-	  end
-	end
+          if obj[tipo.capitalize] =~ /#{buscado}/i
+            obj.each do |k, v|
+              if v == "" ; next ; end
+              puts "#{k}: #{v}"
+            end
+          end
+        end
       end
     end
   end
+
+  #teste
   
   def cadastrar
     puts "Digite os dados da pessoa:"
