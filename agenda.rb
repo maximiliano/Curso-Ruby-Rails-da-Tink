@@ -2,19 +2,6 @@ class Agenda
 
   def initialize
     puts "Agenda criada"
-    @busca = Proc.new do |tipo|
-      puts "Digite o #{tipo} que procura" ; buscado = gets.chomp
-      File.open("teste.yml") do |txt|
-        YAML::load_documents( txt ) do |obj|
-          if obj[tipo.capitalize] =~ /#{buscado}/i
-            obj.each do |k, v|
-              if v == "" ; next ; end
-              puts "#{k}: #{v}"
-            end
-          end
-        end
-      end
-    end
   end
 
   #teste
@@ -48,21 +35,36 @@ class Agenda
   end
 
   def buscar_por_nome
-    @busca.call "nome"
+    buscar "nome"
   end
 
   def buscar_por_bairro
-    @busca.call "bairro"
+    buscar "bairro"
   end
 
   def buscar_por_rua
-    @busca.call "rua"
+    buscar "rua"
   end
 
   def buscar_por_celular
-    @busca.call "celular"
+    buscar "celular"
   end
 
+  private
+
+  def buscar(tipo)
+    puts "Digite o #{tipo} que procura"
+    buscado = gets.chomp
+    File.open("teste.yml") do |txt|
+      YAML::load_documents( txt ) do |obj|
+        if obj[tipo.capitalize] =~ /#{buscado}/i
+          obj.each do |k, v|
+            puts "#{k}: #{v}" unless v == ""
+          end
+        end
+      end
+    end
+  end
 
 
 end
