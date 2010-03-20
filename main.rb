@@ -1,15 +1,12 @@
-# To change this template, choose Tools | Templates
-# and open the template in the editor.
-
 require 'agenda'
 require 'contato'
 require 'telefone'
 require 'endereco'
 
 agenda = Agenda.new
-sair = true
+continue = true
 
-while sair 
+while continue
   puts ".:: Mini Agenda Ruby ::."
   puts "1. Cadastrar novo contato"
   puts "2. Consultar agenda inteira"
@@ -19,22 +16,31 @@ while sair
   puts "6. Procurar por celular"
   puts "7. Sair"
   opcao = gets.chomp
-  if opcao == '1'
+  case opcao
+  when '1'
     agenda.cadastrar
-  elsif opcao == '2'
+  when '2'
     agenda.consultar
-  elsif opcao == '3'
-    agenda.buscar_por_nome
-  elsif opcao == '4'
-    agenda.buscar_por_bairro
-  elsif opcao == '5'
-    agenda.buscar_por_rua
-  elsif opcao == '6'
-    agenda.buscar_por_celular
-  elsif opcao == '7'
-    sair = false
+  when '3'
+    puts "Digite o nome que procura"
+    buscado = gets.chomp
+    agenda.buscar "nome", buscado
+  when '4'
+    puts "Digite o bairro que procura"
+    buscado = gets.chomp
+    agenda.buscar "bairro", buscado
+  when '5'
+    puts "Digite a rua que procura"
+    buscado = gets.chomp
+    agenda.buscar "rua", buscado
+  when '6'
+    puts "Digite o celular que procura"
+    buscado = gets.chomp
+    agenda.buscar "celular", buscado
+  when '7'
+    continue = false
   else
     puts "Opcao invalida"
   end
+  
 end
-

@@ -4,8 +4,6 @@ class Agenda
     puts "Agenda criada"
   end
 
-  #teste
-  
   def cadastrar
     puts "Digite os dados da pessoa:"
     puts "Nome: " ; nome = gets.chomp
@@ -26,35 +24,16 @@ class Agenda
   def consultar
     File.open("teste.yml") do |txt|
       YAML::load_documents( txt ) do |obj|
-	obj.each do |k, v|
-	  if v == "" ; next ; end
-	    puts "#{k}: #{v}"
-	end
+        obj.each do |k, v|
+          if v == "" ; next ; end
+          puts "#{k}: #{v}"
+        end
+        puts
       end
     end
   end
 
-  def buscar_por_nome
-    buscar "nome"
-  end
-
-  def buscar_por_bairro
-    buscar "bairro"
-  end
-
-  def buscar_por_rua
-    buscar "rua"
-  end
-
-  def buscar_por_celular
-    buscar "celular"
-  end
-
-  private
-
-  def buscar(tipo)
-    puts "Digite o #{tipo} que procura"
-    buscado = gets.chomp
+  def buscar(tipo, buscado)
     File.open("teste.yml") do |txt|
       YAML::load_documents( txt ) do |obj|
         if obj[tipo.capitalize] =~ /#{buscado}/i
@@ -62,21 +41,9 @@ class Agenda
             puts "#{k}: #{v}" unless v == ""
           end
         end
+        puts
       end
     end
   end
 
-
 end
-
-
-
-
-
-
-
-
-
-
-       # puts "Celular: #{obj['Celular']}, Fixo: #{obj['Fixo']}, Ramal: #{obj['Ramal']}, Rua: #{obj['Rua']}, Bairro: #{obj['Bairro']}, Numero: #{obj['Numero']}, Sala: #{obj['Sala']}, Complemento: #{obj['Complemento']}"
-	#end
