@@ -24,19 +24,19 @@ while continue
   when '3'
     puts "Digite o nome que procura"
     buscado = gets.chomp
-    agenda.buscar "nome", buscado
+    agenda.buscar "Nome", buscado
   when '4'
     puts "Digite o bairro que procura"
     buscado = gets.chomp
-    agenda.buscar "bairro", buscado
+    agenda.buscar "Bairro", buscado
   when '5'
     puts "Digite a rua que procura"
     buscado = gets.chomp
-    agenda.buscar "rua", buscado
+    agenda.buscar "Rua", buscado
   when '6'
     puts "Digite o celular que procura"
     buscado = gets.chomp
-    agenda.buscar "celular", buscado
+    agenda.buscar "Celular", buscado
   when '7'
     continue = false
   else

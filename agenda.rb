@@ -17,16 +17,14 @@ class Agenda
     puts "Numero" ; numero = gets.chomp
     puts "Sala" ; sala = gets.chomp
     puts "Complemento" ; complemento = gets.chomp
-
-    contato = Contato.new({"Nome" => nome}, Telefone.new(celular, fixo, ramal), Endereco.new(rua, bairro, numero, sala, complemento))
+    Contato.new({"Nome" => nome}, Telefone.new(celular, fixo, ramal), Endereco.new(rua, bairro, numero, sala, complemento))
   end
 
   def consultar
     File.open("teste.yml") do |txt|
-      YAML::load_documents( txt ) do |obj|
-        obj.each do |k, v|
-          if v == "" ; next ; end
-          puts "#{k}: #{v}"
+      YAML::load_documents( txt ) do |objs|
+        objs.each do |k, v|
+          puts "#{k}: #{v}" unless v.empty?
         end
         puts
       end
@@ -35,10 +33,10 @@ class Agenda
 
   def buscar(tipo, buscado)
     File.open("teste.yml") do |txt|
-      YAML::load_documents( txt ) do |obj|
-        if obj[tipo.capitalize] =~ /#{buscado}/i
-          obj.each do |k, v|
-            puts "#{k}: #{v}" unless v == ""
+      YAML::load_documents( txt ) do |objs|
+        if objs[tipo] =~ /#{buscado}/i
+          objs.each do |k, v|
+            puts "#{k}: #{v}" unless v.empty?
           end
         end
         puts
